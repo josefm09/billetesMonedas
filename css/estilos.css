@@ -42,8 +42,6 @@ body{
 	font-size: 1em;
 }
 .imgFoto{
-	border: 15px solid blue;
-	border-radius: 150px;
 	/*display: none;*/
 	width: 150px;
 }
