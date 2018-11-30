@@ -1,0 +1,27 @@
+{
+  "name": "marvel2183",
+  "version": "1.0.0",
+  "description": "Electron personajes de marvel",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron .",
+    "empaqueta": "electron-packager . Marvel --overwrite --asar"
+  },
+  "keywords": [
+    "Marvel",
+    "electron",
+    "javascript",
+    "html",
+    "css",
+    "rc"
+  ],
+  "author": "Jose Carlos Flores Moran",
+  "license": "MIT",
+  "dependencies": {
+    "asar": "^0.14.5",
+    "electron": "^3.0.10",
+    "electron-packager": "^12.2.0",
+    "electron-require": "^0.3.0"
+  }
+}
