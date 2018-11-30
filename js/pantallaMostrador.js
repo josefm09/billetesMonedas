@@ -1,8 +1,24 @@
-//var vitrina = "V" + localStorage.getItem('vitrina')
 var vitrina = localStorage.getItem('vitrina')
 
+var {BrowserWindow}=require('electron').remote
+const app = require('electron').app
+const path = require('path')
+const url = require('url')
+
+var btnGrupo = document.getElementsByClassName('btnGrupo')
+
+var buscaGrupos = function(){
+	localStorage.setItem("mostrador", this.value)
+	PantallaGrupo= new BrowserWindow({width:1200,heigth:900});
+	PantallaGrupo.loadURL(url.format({
+		pathname: path.join(__dirname, '../vista/pantallaGrupos.html'),
+		protocol: 'file',
+		slashes: true
+	}))
+	PantallaGrupo.show()
+}
+
 var buscaVitrina = function() {
-    //personaje=document.getElementById('txtPersonaje').value;
     console.log(vitrina)
 	var url="http://museobillete.azurewebsites.net/api/Expo/"
 	fetch(url+vitrina)
@@ -10,23 +26,23 @@ var buscaVitrina = function() {
 	.then(datos=>{
 		var foto = ''
 		document.getElementById('abajo').innerHTML=''
-		for(let dato in datos){
-			foto = datos[dato].imagenFondoUrl
+		for(let dato in datos.mostradores){
+			foto = datos.mostradores[dato].imagenFondoUrl
 		document.getElementById('abajo').innerHTML += `
 			<article class="abajoIzquierda">
 					<img src="${foto}" class="imgFoto">
 			</article>
 			<article class="abajoDerecha">
-				<div class="txtNombre">${datos[dato].titulo}</div>
-				<button class="btnMostrador" value="${datos[dato].id}">Mostradores</button> 
+				<div class="txtNombre">${datos.mostradores[dato].titulo}</div>
+				<button class="btnGrupo" value="${datos.mostradores[dato].id}">Grupos</button> 
 			</article>
 			<hr>
 			<br>
 		`
 		}
-		/*for(let i=0;i<btnMostrador.length;i++){
-			btnMostrador[i].addEventListener('click', buscaMostrador)
-		}*/
+		for(let i=0;i<btnGrupo.length;i++){
+			btnGrupo[i].addEventListener('click', buscaGrupos)
+		}
 		
 	})
 }
